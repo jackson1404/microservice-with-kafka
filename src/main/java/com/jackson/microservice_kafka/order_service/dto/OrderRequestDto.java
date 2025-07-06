@@ -1,30 +1,19 @@
-package com.jackson.microservice_kafka.order_service.model;
+package com.jackson.microservice_kafka.order_service.dto;
 
 import com.jackson.microservice_kafka.order_service.enumerate.OrderStatus;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
-@Entity
-@Table(name = "tbl_orders")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+public class OrderRequestDto {
 
     private String orderNumber;
     private String customerId;
     private String productId;
     private int quantity;
     private Double totalPrice;
-    private OrderStatus status;
-
-
 
 }
