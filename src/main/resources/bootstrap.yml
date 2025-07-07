@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: microservice-kafka.order-service
+
+  cloud:
+    config:
+      import: configserver:http://localhost:8888
+      fail-fast: true
+      retry:
+        initial-interval: 1000ms
+        max-interval: 8000ms
+        max-attempts: 5
+        multiplier: 1.5

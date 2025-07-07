@@ -26,11 +26,11 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
-app:
-  topics:
-    order-created: order-created-topic
-    inventory-check: inventory-check-topic
-    order-processed: order-processed-topic
+#app:
+#  topics:
+#    order-created: order-created-topic
+#    inventory-check: inventory-check-topic
+#    order-processed: order-processed-topic
 
 
 
