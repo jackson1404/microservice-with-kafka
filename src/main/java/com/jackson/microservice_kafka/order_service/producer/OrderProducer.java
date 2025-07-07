@@ -1,5 +1,6 @@
 package com.jackson.microservice_kafka.order_service.producer;
 
+import com.jackson.microservice_kafka.order_service.config.AppTopicProperties;
 import com.jackson.microservice_kafka.order_service.model.OrderEntity;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -15,22 +16,22 @@ import java.util.Map;
 @Component
 public class OrderProducer {
 
-    @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    @Value("${app.topics.order-created}")
-    private String orderCreatedTopic;
+    private final AppTopicProperties appTopicProperties;
 
-    @Value("${app.topics.inventory-check}")
-    private String inventoryCheckTopic;
+    public OrderProducer(KafkaTemplate<String, Object> kafkaTemplate, AppTopicProperties appTopicProperties) {
+        this.kafkaTemplate = kafkaTemplate;
+        this.appTopicProperties = appTopicProperties;
+    }
 
     public void sendOrderCreatedEvent(OrderEntity order){
-        kafkaTemplate.send(orderCreatedTopic, order.getOrderNumber(), order);
+        kafkaTemplate.send(appTopicProperties.topics().orderCreated(), order.getOrderNumber(), order);
         log.info("Order created event sent for order: {}", order.getOrderNumber());
     }
 
     public void checkInventoryEvent(OrderEntity order){
-        kafkaTemplate.send(inventoryCheckTopic, order.getProductId(),
+        kafkaTemplate.send(appTopicProperties.topics().inventoryCheck(), order.getProductId(),
                 Map.of(
                         "orderNumber", order.getOrderNumber(),
                         "productId", order.getProductId(),
