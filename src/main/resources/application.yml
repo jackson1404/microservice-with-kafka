@@ -1,10 +1,13 @@
 spring:
+  cloud:
+    bootstrap:
+      enabled: true
   application:
     name: microservice-kafka.order-service
   datasource:
     url: jdbc:postgresql://localhost:5432/micro_kafka_order_db
     username: postgres
-    password: root
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -25,12 +28,3 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-
-#app:
-#  topics:
-#    order-created: order-created-topic
-#    inventory-check: inventory-check-topic
-#    order-processed: order-processed-topic
-
-
-

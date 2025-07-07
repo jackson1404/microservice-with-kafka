@@ -1,20 +1,22 @@
 package com.jackson.microservice_kafka.order_service.producer;
 
 import com.jackson.microservice_kafka.order_service.model.OrderEntity;
-import lombok.RequiredArgsConstructor;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
 @Slf4j
-@Service
-@RequiredArgsConstructor
+@Component
 public class OrderProducer {
 
-    private final KafkaTemplate<String, Object> kafkaTemplate;
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
 
     @Value("${app.topics.order-created}")
     private String orderCreatedTopic;
