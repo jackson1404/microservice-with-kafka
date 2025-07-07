@@ -36,4 +36,13 @@ public class OrderServiceImpl implements OrderService {
 
         return savedOrder;
     }
+
+    @Override
+    public void updateOrderStatus(String orderNumber, OrderStatus orderFinalStatus) {
+        orderRepository.findByOrderNumber(orderNumber)
+                .ifPresent(order -> {
+                    order.setStatus(orderFinalStatus);
+                    orderRepository.save(order);
+                });
+    }
 }
