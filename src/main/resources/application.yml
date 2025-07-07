@@ -1,7 +1,4 @@
 spring:
-  cloud:
-    bootstrap:
-      enabled: true
   application:
     name: microservice-kafka.order-service
   datasource:
