@@ -21,10 +21,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "app")
 public record AppTopicProperties(Topics topics, Kafka kafka) {
+
     public record Topics(String orderCreated, String orderProcessed,
                          String inventoryCheck, String inventoryUpdated){}
+
     public record Kafka(ConsumerGroups consumerGroups){
+
         public record ConsumerGroups (String orderCreated, String orderProcessed,
                                       String inventoryCheck, String inventoryUpdated){}
+
     }
 }
