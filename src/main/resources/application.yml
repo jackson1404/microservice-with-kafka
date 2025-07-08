@@ -25,3 +25,10 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+app:
+  topics:
+    stock-check: stock-check-topic
+  kafka:
+    consumer-groups:
+      stock-check: stock-check-group
