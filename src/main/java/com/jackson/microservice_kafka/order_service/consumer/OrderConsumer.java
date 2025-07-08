@@ -11,6 +11,7 @@ import com.jackson.microservice_kafka.order_service.dto.OrderProcessedDto;
 import com.jackson.microservice_kafka.order_service.dto.OrderRequestDto;
 import com.jackson.microservice_kafka.order_service.enumerate.OrderStatus;
 import com.jackson.microservice_kafka.order_service.service.OrderService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.hibernate.query.Order;
@@ -29,6 +30,7 @@ import java.util.function.Consumer;
 
 @Component
 @RequiredArgsConstructor
+@Getter
 public class OrderConsumer {
 
     private final AppTopicProperties appTopicProperties;

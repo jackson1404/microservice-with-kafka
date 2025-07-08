@@ -26,12 +26,12 @@ public class OrderProducer {
     }
 
     public void sendOrderCreatedEvent(OrderEntity order){
-        kafkaTemplate.send(appTopicProperties.topics().orderCreated(), order.getOrderNumber(), order);
+        kafkaTemplate.send(appTopicProperties.getTopics().getOrderCreated(), order.getOrderNumber(), order);
         log.info("Order created event sent for order: {}", order.getOrderNumber());
     }
 
     public void checkInventoryEvent(OrderEntity order){
-        kafkaTemplate.send(appTopicProperties.topics().inventoryCheck(), order.getProductId(),
+        kafkaTemplate.send(appTopicProperties.getTopics().getInventoryCheck(), order.getProductId(),
                 Map.of(
                         "orderNumber", order.getOrderNumber(),
                         "productId", order.getProductId(),

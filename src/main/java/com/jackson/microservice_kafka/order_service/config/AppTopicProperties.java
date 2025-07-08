@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * AppTopicProperties Class.
@@ -19,16 +20,47 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author
  */
 
+@Component
 @ConfigurationProperties(prefix = "app")
-public record AppTopicProperties(Topics topics, Kafka kafka) {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class AppTopicProperties {
 
-    public record Topics(String orderCreated, String orderProcessed,
-                         String inventoryCheck, String inventoryUpdated){}
+    private Topics topics;
 
-    public record Kafka(ConsumerGroups consumerGroups){
+    private Kafka kafka;
 
-        public record ConsumerGroups (String orderCreated, String orderProcessed,
-                                      String inventoryCheck, String inventoryUpdated){}
-
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Topics{
+        private String orderCreated;
+        private String orderProcessed;
+        private String inventoryCheck;
+        private String inventoryUpdated;
     }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Kafka{
+        private ConsumerGroups consumerGroups;
+
+        @Data
+        @AllArgsConstructor
+        @NoArgsConstructor
+        public static class ConsumerGroups{
+
+            private String orderCreated;
+            private String orderProcessed;
+            private String inventoryCheck;
+            private String inventoryUpdated;
+            private String notificationOrderCreated;
+            private String notificationOrderProcessed;
+            private String notificationInventoryCheck;
+
+        }
+    }
+
 }
