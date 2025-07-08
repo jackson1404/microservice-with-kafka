@@ -32,7 +32,6 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor
 @Getter
 public class OrderConsumer {
-
     private final AppTopicProperties appTopicProperties;
 
     private final OrderService orderService;
