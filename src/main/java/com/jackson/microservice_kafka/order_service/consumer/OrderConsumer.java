@@ -35,7 +35,6 @@ import java.util.function.Consumer;
 @Data
 public class OrderConsumer {
 
-
     @Value("${app.topics.order-processed}")
     private String orderProcessedTopic;
 
@@ -59,17 +58,6 @@ public class OrderConsumer {
 
     }
 
-    @KafkaListener(topics = "stock-status", groupId = "order-service")
-    public void consume(String messageJson) throws JsonProcessingException {
-        System.out.println("Received raw message: " + messageJson);
 
-        ObjectMapper mapper = new ObjectMapper();
-        StockStatusEvent event = mapper.readValue(messageJson, StockStatusEvent.class);
-
-        if ("OUT_OF_STOCK".equalsIgnoreCase(event.getStatus())) {
-            System.out.println("🛑 Order Service: Item out of stock -> " + event.getProductName());
-            // Logic: prevent orders for this item
-        }
-    }
 
 }
