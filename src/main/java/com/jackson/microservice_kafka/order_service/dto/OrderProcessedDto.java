@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderProcessedDto {
 
     private String orderNumber;
-    private String orderStatus;
+    private String status;
     private String message;
 
 }

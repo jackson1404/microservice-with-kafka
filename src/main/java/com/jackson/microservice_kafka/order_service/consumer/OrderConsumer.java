@@ -49,12 +49,14 @@ public class OrderConsumer {
     private OrderService orderService;
 
     @KafkaListener(topics = "#{__listener.orderProcessedTopic}", groupId = "#{__listener.orderProcessedGroup}")
-    public void consumeOrderProcessed(String jsonMessage) {
+    public void consumeOrderProcessed(String jsonMessage) throws JsonProcessingException {
 
-        OrderProcessedDto orderProcessedDto = record.value();
+        ObjectMapper mapper = new ObjectMapper();
+
+        OrderProcessedDto orderProcessedDto = mapper.readValue(jsonMessage, OrderProcessedDto.class);
 
         String orderNumber = orderProcessedDto.getOrderNumber();
-        String orderStatus = orderProcessedDto.getOrderStatus();
+        String orderStatus = orderProcessedDto.getStatus();
 
         OrderStatus orderFinalStatus = "SUCCESS".equals(orderStatus)?
                 OrderStatus.COMPLETED: OrderStatus.FAILED;
