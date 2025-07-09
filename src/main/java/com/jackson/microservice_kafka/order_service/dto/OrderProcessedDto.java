@@ -6,7 +6,9 @@
  * *************************************************************/
 package com.jackson.microservice_kafka.order_service.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -17,12 +19,15 @@ import lombok.RequiredArgsConstructor;
  * @author
  */
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-@RequiredArgsConstructor
 public class OrderProcessedDto {
 
     private String orderNumber;
     private String orderStatus;
+    private String message;
+
 }
 
 

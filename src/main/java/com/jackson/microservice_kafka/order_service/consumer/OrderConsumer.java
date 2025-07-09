@@ -12,10 +12,13 @@ import com.jackson.microservice_kafka.order_service.dto.OrderRequestDto;
 import com.jackson.microservice_kafka.order_service.dto.StockStatusEvent;
 import com.jackson.microservice_kafka.order_service.enumerate.OrderStatus;
 import com.jackson.microservice_kafka.order_service.service.OrderService;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.hibernate.query.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -31,8 +34,9 @@ import java.util.function.Consumer;
  */
 
 @Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Data
+@NoArgsConstructor
 public class OrderConsumer {
 
     @Value("${app.topics.order-processed}")
@@ -41,10 +45,11 @@ public class OrderConsumer {
     @Value("${app.kafka.consumer-groups.order-processed}")
     private String orderProcessedGroup;
 
-    private final OrderService orderService;
+    @Autowired
+    private OrderService orderService;
 
     @KafkaListener(topics = "#{__listener.orderProcessedTopic}", groupId = "#{__listener.orderProcessedGroup}")
-    public void consumeOrderProcessed(ConsumerRecord<String, OrderProcessedDto> record) {
+    public void consumeOrderProcessed(String jsonMessage) {
 
         OrderProcessedDto orderProcessedDto = record.value();
 
