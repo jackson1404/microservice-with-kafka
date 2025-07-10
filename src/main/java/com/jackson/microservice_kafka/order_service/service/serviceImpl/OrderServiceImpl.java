@@ -29,9 +29,9 @@ public class OrderServiceImpl implements OrderService {
         order.setStatus(OrderStatus.CREATED);
 
         OrderEntity savedOrder = orderRepository.save(order);
-        //add order create event
-//        orderProducer.sendOrderCreatedEvent(savedOrder);
-        //add inventory check event
+        // add order create event
+        orderProducer.sendOrderCreatedEvent(savedOrder);
+        // add inventory check event
         orderProducer.checkInventoryEvent(savedOrder);
 
         return savedOrder;

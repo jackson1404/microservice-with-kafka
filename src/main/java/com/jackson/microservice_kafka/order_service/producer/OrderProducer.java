@@ -30,10 +30,17 @@ public class OrderProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-//    public void sendOrderCreatedEvent(OrderEntity order){
-//        kafkaTemplate.send(orderCreatedTopic, order.getOrderNumber(), order);
-//        log.info("Order created event sent for order: {}", order.getOrderNumber());
-//    }
+    public void sendOrderCreatedEvent(OrderEntity order){
+
+        InventoryProducerDto dto = new InventoryProducerDto(
+                order.getProductId(),
+                order.getOrderNumber(),
+                order.getQuantity()
+        );
+
+        kafkaTemplate.send(orderCreatedTopic, order.getOrderNumber(), dto);
+        log.info("Order created event sent for order: {}", order.getOrderNumber());
+    }
 
     public void checkInventoryEvent(OrderEntity order){
 
