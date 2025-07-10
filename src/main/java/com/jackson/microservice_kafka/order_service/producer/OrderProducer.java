@@ -1,6 +1,7 @@
 package com.jackson.microservice_kafka.order_service.producer;
 
 import com.jackson.microservice_kafka.order_service.dto.InventoryProducerDto;
+import com.jackson.microservice_kafka.order_service.enumerate.EventType;
 import com.jackson.microservice_kafka.order_service.model.OrderEntity;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,8 @@ public class OrderProducer {
         InventoryProducerDto dto = new InventoryProducerDto(
                 order.getProductId(),
                 order.getOrderNumber(),
-                order.getQuantity()
+                order.getQuantity(),
+                EventType.ORDER_CREATED
         );
 
         kafkaTemplate.send(orderCreatedTopic, order.getOrderNumber(), dto);
@@ -47,7 +49,8 @@ public class OrderProducer {
         InventoryProducerDto dto = new InventoryProducerDto(
                 order.getProductId(),
                 order.getOrderNumber(),
-                order.getQuantity()
+                order.getQuantity(),
+                EventType.INVENTORY_CHECK_REQUESTED
         );
 
         kafkaTemplate.send(inventoryCheckTopic, String.valueOf(order.getProductId()), dto);
