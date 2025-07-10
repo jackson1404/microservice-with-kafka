@@ -1,8 +1,6 @@
 package com.jackson.microservice_kafka.order_service.dto;
 
-import com.jackson.microservice_kafka.order_service.enumerate.EventType;
-import jdk.jfr.Event;
-import lombok.AllArgsConstructor;
+import com.jackson.enumerate.EventType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

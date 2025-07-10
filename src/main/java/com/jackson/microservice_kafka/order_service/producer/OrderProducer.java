@@ -1,19 +1,12 @@
 package com.jackson.microservice_kafka.order_service.producer;
 
+import com.jackson.enumerate.EventType;
 import com.jackson.microservice_kafka.order_service.dto.InventoryProducerDto;
-import com.jackson.microservice_kafka.order_service.enumerate.EventType;
 import com.jackson.microservice_kafka.order_service.model.OrderEntity;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Slf4j
 @Component
